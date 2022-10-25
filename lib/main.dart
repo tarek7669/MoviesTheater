@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyApp());
+import 'View/Pages/Login.dart';
+import 'View/Pages/Splash.dart';
+import 'ViewModel/Database/Network/dio_helper.dart';
+
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await DioHelper.init();
+  runApp(
+      MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: Splash()));
 }
 
 class MyApp extends StatelessWidget {
