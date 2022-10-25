@@ -2,8 +2,7 @@
 const baseUrl = 'https://movieapi.orangedigitalcenteregypt.com/';
 const loginEndPoint = 'auth/login';
 const registerEndPoint = 'auth/register';
-const universityEndPoint = 'university';
-const gradeEndPoint = 'grade';
+const moviesEndPoint = '/movies';
 
 
 // End Points for Main Screen

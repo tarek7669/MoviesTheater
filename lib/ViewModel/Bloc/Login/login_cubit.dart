@@ -21,36 +21,32 @@ class LoginCubit extends Cubit<LoginState> {
   TextEditingController passwordController = TextEditingController();
   String message = '';
   SharedPref shared = SharedPref();
-LoginModel? loginModel;
-  void Login(BuildContext context) async {
+  LoginModel? loginModel;
+
+
+  void Login(BuildContext context) {
+
     var temp = {
       "email": emailController.text,
       "password": passwordController.text,
     };
-    debugPrint("${emailController.text}");
 
      DioHelper.postData(url: loginEndPoint, data: temp).then((value) {
-      debugPrint("----------> ${value.statusCode}");
       print(value.data.toString());
       if (value.statusCode == 200) {
         Token = value.data['accessToken'];
         shared.setToken("token", Token);
         if (Token != '' && Token != null && Token.isNotEmpty) {
-          debugPrint("\n\n\n" + "Token:   $Token" + "\n\n\n");
           message = "success";
-          debugPrint("message ----------> $message");
           Navigator.pushReplacement(
               context, MaterialPageRoute(builder: (context) => Home()));
         } else {
-          debugPrint("\n\n\n" + "erorrrrrrrrrrrrrrrrr" + "\n\n\n");
-
           message = 'Token Error';
         }
         emit(LoginSuccess());
       }
       else{
-        debugPrint("\n\n\n" + "erorrrrrrrrrrrrrrrrr" + "\n\n\n");
-
+        message = 'error';
       }
     }).catchError((e) {
       message = "error";

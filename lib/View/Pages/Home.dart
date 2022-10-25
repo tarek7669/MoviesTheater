@@ -1,6 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_theater/ColorConsts.dart';
+
+import '../../ViewModel/Bloc/Movies/movies_cubit.dart';
 
 class Home extends StatelessWidget {
   Home({Key? key}) : super(key: key);
@@ -8,7 +11,9 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    Size size = MediaQuery
+        .of(context)
+        .size;
     return Scaffold(
       drawer: Container(
         width: (size.width / 3) * 2,
@@ -21,25 +26,25 @@ class Home extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text("Stars",
-              style: TextStyle(
-                color: primaryColor,
-                fontSize: 35
-              )
+                style: TextStyle(
+                    color: primaryColor,
+                    fontSize: 35
+                )
             ),
             Text("Theater",
               style: TextStyle(
-                color: Colors.white,
-                fontSize: 15
+                  color: Colors.white,
+                  fontSize: 15
               ),
             )
           ],
         ),
         centerTitle: true,
         leading: InkResponse(
-          onTap: () {
-            drawerKey.currentState!.openDrawer();
-          },
-          child: Image.asset("assets/icons/drawerIcon.png")
+            onTap: () {
+              drawerKey.currentState!.openDrawer();
+            },
+            child: Image.asset("assets/icons/drawerIcon.png")
         ),
       ),
       body: SingleChildScrollView(
@@ -68,10 +73,22 @@ class Home extends StatelessWidget {
               ),
             ),
 
-            // CarouselSlider(
-            //   items: items,
-            //   options: options
-            // )
+            BlocProvider(
+              create: (context) => MoviesCubit(),
+              child: BlocConsumer<MoviesCubit, MoviesState>(
+                listener: (context, state) {
+                  // TODO: implement listener
+                },
+                builder: (context, state) {
+                  MoviesCubit movie = MoviesCubit.get(context);
+                  return movie.moviesModel == null ? CircularProgressIndicator(color: primaryColor,)
+                  : CarouselSlider(
+                    items: [],
+                    options: CarouselOptions(height: 400.0),
+                  );
+                },
+              ),
+            )
           ],
         ),
       ),
