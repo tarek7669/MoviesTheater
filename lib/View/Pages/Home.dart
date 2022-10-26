@@ -2,12 +2,15 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_theater/ColorConsts.dart';
+import 'package:movies_theater/View/Components/Core/CustomAppBar.dart';
 
-import '../../ViewModel/Bloc/Movies/movies_cubit.dart';
+import '../../ViewModel/Bloc/Home/home_cubit.dart';
+import '../Components/Core/Drawer.dart';
+import '../Components/Home/AllMoviesCarousel.dart';
 
 class Home extends StatelessWidget {
   Home({Key? key}) : super(key: key);
-  GlobalKey<ScaffoldState> drawerKey = GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> drawerKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
@@ -15,41 +18,32 @@ class Home extends StatelessWidget {
         .of(context)
         .size;
     return Scaffold(
-      drawer: Container(
-        width: (size.width / 3) * 2,
-        color: Colors.grey[900],
-      ),
+      key: drawerKey,
+      drawer: CustomDrawer(size),
       backgroundColor: backColor,
-      appBar: AppBar(
-        backgroundColor: backColor,
-        title: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text("Stars",
-                style: TextStyle(
-                    color: primaryColor,
-                    fontSize: 35
-                )
-            ),
-            Text("Theater",
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 15
+
+      appBar: CustomAppBar(
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text("Stars",
+                  style: TextStyle(
+                      color: primaryColor,
+                      fontSize: 35
+                  )
               ),
-            )
-          ],
-        ),
-        centerTitle: true,
-        leading: InkResponse(
-            onTap: () {
-              drawerKey.currentState!.openDrawer();
-            },
-            child: Image.asset("assets/icons/drawerIcon.png")
-        ),
-      ),
+              Text("Theater",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 15
+                ),
+              )
+            ],
+          ), drawerKey),
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
               padding: EdgeInsets.only(top: 50),
@@ -73,22 +67,49 @@ class Home extends StatelessWidget {
               ),
             ),
 
+            SizedBox(height: 50),
+
             BlocProvider(
-              create: (context) => MoviesCubit(),
-              child: BlocConsumer<MoviesCubit, MoviesState>(
+              create: (context) => HomeCubit()..getMovies(),
+              child: BlocConsumer<HomeCubit, HomeState>(
                 listener: (context, state) {
                   // TODO: implement listener
                 },
                 builder: (context, state) {
-                  MoviesCubit movie = MoviesCubit.get(context);
+                  HomeCubit movie = HomeCubit.get(context);
                   return movie.moviesModel == null ? CircularProgressIndicator(color: primaryColor,)
-                  : CarouselSlider(
-                    items: [],
-                    options: CarouselOptions(height: 400.0),
-                  );
+                  : AllMoviesCarousel(context, movie.moviesModel);
                 },
               ),
-            )
+            ),
+
+            SizedBox(height: 70),
+
+            Container(
+              padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text("Coming Soon",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 25
+                    )
+                  ),
+                  CarouselSlider(
+                    items: [],
+                    options: CarouselOptions(
+                      height: 266.0,
+                      scrollPhysics: BouncingScrollPhysics(),
+                      // autoPlay: true,
+                      // autoPlayCurve: Curves.bounceInOut
+                      aspectRatio: 10,
+
+                    ),
+                  )
+                ],
+              ),
+            ),
           ],
         ),
       ),

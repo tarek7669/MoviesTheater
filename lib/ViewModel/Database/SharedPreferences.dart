@@ -12,26 +12,31 @@ class SharedPref {
   //   // prefs.setString(key, value)
   // }
 
-  void setToken(String pref, value)async {
+  static late SharedPreferences sharedPreferences;
 
-    SharedPreferences prefs= await SharedPreferences.getInstance();
-
-    prefs.setString(pref, value);
+  static init() async{
+    sharedPreferences = await SharedPreferences.getInstance();
   }
 
-  Future<String?> getToken(String pref)async{
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? token = prefs.getString('token');
-    return token;
+  static void setToken(String pref, value)async {
+
+    // SharedPreferences prefs= await SharedPreferences.getInstance();
+
+    sharedPreferences.setString(pref, value);
   }
 
-  Future<bool> check() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    if(prefs.containsKey('token')){
+  static Future<String?> getToken(String pref)async{
+    // SharedPreferences prefs = await SharedPreferences.getInstance();
+    // String? token = sharedPreferences.getString('token');
+    return sharedPreferences.getString('token');
+  }
+
+  static Future<bool> check() async {
+    // SharedPreferences prefs = await SharedPreferences.getInstance();
+    if(sharedPreferences.containsKey('token'))
       return true;
-    }else{
-      return false;
-    }
+    return false;
+
   }
 
 }

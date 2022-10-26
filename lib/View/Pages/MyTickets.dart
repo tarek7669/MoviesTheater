@@ -1,21 +1,32 @@
 import 'package:flutter/material.dart';
 
 import '../../ColorConsts.dart';
+import '../Components/Core/CustomAppBar.dart';
+import '../Components/Core/Drawer.dart';
 
 class MyTickets extends StatelessWidget {
-  const MyTickets({Key? key}) : super(key: key);
+  MyTickets({Key? key}) : super(key: key);
+
+  final GlobalKey<ScaffoldState> drawerKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery
+        .of(context)
+        .size;
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: backColor,
-        title: Text("My Tickets",
+      backgroundColor: backColor,
+      key: drawerKey,
+      drawer: CustomDrawer(size),
+
+      appBar: CustomAppBar(
+        Text("My Tickets",
           style: TextStyle(
-            color: Colors.white
+              color: Colors.white
           ),
-        ),
-      ),
+
+        ),drawerKey
+      )
     );
   }
 }

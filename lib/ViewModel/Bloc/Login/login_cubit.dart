@@ -5,6 +5,7 @@ import 'package:meta/meta.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_theater/Model/LoginModel.dart';
 import '../../../Constants.dart';
+import '../../../View/Pages/BottomNavigationBar.dart';
 import '../../../View/Pages/Home.dart';
 import '../../Database/Network/dio_helper.dart';
 import '../../Database/Network/end_points.dart';
@@ -20,7 +21,6 @@ class LoginCubit extends Cubit<LoginState> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   String message = '';
-  SharedPref shared = SharedPref();
   LoginModel? loginModel;
 
 
@@ -32,14 +32,13 @@ class LoginCubit extends Cubit<LoginState> {
     };
 
      DioHelper.postData(url: loginEndPoint, data: temp).then((value) {
-      print(value.data.toString());
       if (value.statusCode == 200) {
         Token = value.data['accessToken'];
-        shared.setToken("token", Token);
+        SharedPref.setToken("token", Token);
         if (Token != '' && Token != null && Token.isNotEmpty) {
           message = "success";
           Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (context) => Home()));
+              context, MaterialPageRoute(builder: (context) => BottomNavBar()));
         } else {
           message = 'Token Error';
         }

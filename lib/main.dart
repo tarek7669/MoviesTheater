@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'View/Pages/Login.dart';
 import 'View/Pages/Splash.dart';
 import 'ViewModel/Database/Network/dio_helper.dart';
+import 'ViewModel/Database/SharedPreferences.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await DioHelper.init();
+  await SharedPref.init();
   runApp(
       MaterialApp(
         debugShowCheckedModeBanner: false,

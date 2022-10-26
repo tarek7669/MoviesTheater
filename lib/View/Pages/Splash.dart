@@ -2,8 +2,11 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:movies_theater/ViewModel/Database/SharedPreferences.dart';
 
 import '../../ColorConsts.dart';
+import '../../Constants.dart';
+import 'BottomNavigationBar.dart';
 import 'Home.dart';
 import 'Login.dart';
 
@@ -24,7 +27,15 @@ class _SplashState extends State<Splash> {
     Timer(
       Duration(seconds: 4),
       () {
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Login()));
+        SharedPref.getToken("token").then((value) {
+          if (value != '' && value != null && value.isNotEmpty) {
+            Token = value;
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => BottomNavBar()));
+          }else{
+
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Login()));
+          }
+        });
       });
     super.initState();
   }
