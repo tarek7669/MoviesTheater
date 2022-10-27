@@ -48,16 +48,19 @@ class _SplashState extends State<Splash> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("Movies",
-              style: TextStyle(
-                color: primaryColor,
-                fontSize: 65
-              ),
-            ),
+            // Text("Stars",
+            //   style: TextStyle(
+            //     color: primaryColor,
+            //     fontSize: 65,
+            //     fontFamily: 'Salsa'
+            //   ),
+            // ),
+            Image.asset("assets/images/stars.png"),
             Text("Theater",
               style: TextStyle(
                 color: Colors.white,
-                fontSize: 35
+                fontSize: 35,
+                fontFamily: 'Salsa'
               ),)
           ]
         ),

@@ -35,6 +35,7 @@ dependencies:
   dio: ^4.0.6
   shared_preferences: ^2.0.15
   carousel_slider: ^4.1.1
+  dots_indicator: ^2.1.0
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -80,7 +81,10 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
+  fonts:
+    - family: Salsa
+      fonts:
+        - asset: assets/fonts/Salsa/Salsa-Regular.ttf
   #   - family: Schyler
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf

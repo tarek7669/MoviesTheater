@@ -6,3 +6,5 @@ const registerEndPoint = 'auth/register';
 
 const moviesEndPoint = '/movies';
 const upcomingMoviesEndPoint = '/movies/upcoming';
+
+const ticketsEndPoint = '/tickets';

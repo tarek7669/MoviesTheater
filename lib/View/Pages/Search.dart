@@ -17,7 +17,7 @@ class Search extends StatelessWidget {
     return Scaffold(
       backgroundColor: backColor,
       key: drawerKey,
-      drawer: CustomDrawer(size),
+      drawer: CustomDrawer(context, size),
       appBar:  CustomAppBar(
         Text("Search",
           style: TextStyle(

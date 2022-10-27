@@ -1,48 +1,44 @@
-class MoviesModel {
-  num? id;
+class UpcomingMoviesModel {
   String? name;
   String? imageUrl;
-  num? rating;
-  num? duration;
   String? overview;
-  String? genres;
+  num? rating;
+  String? trailer;
+  num? duration;
   bool? adult;
-  bool? deleted;
+  String? genre;
 
-  MoviesModel(
-      {this.id,
-        this.name,
+  UpcomingMoviesModel(
+      {this.name,
         this.imageUrl,
-        this.rating,
-        this.duration,
         this.overview,
-        this.genres,
+        this.rating,
+        this.trailer,
+        this.duration,
         this.adult,
-        this.deleted});
+        this.genre});
 
-  MoviesModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
+  UpcomingMoviesModel.fromJson(Map<String, dynamic> json) {
     name = json['name'];
     imageUrl = json['imageUrl'];
-    rating = json['rating'];
-    duration = json['duration'];
     overview = json['overview'];
-    genres = json['genres'];
+    rating = json['rating'];
+    trailer = json['trailer'];
+    duration = json['duration'];
     adult = json['adult'];
-    deleted = json['deleted'];
+    genre = json['genre'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
     data['name'] = this.name;
     data['imageUrl'] = this.imageUrl;
-    data['rating'] = this.rating;
-    data['duration'] = this.duration;
     data['overview'] = this.overview;
-    data['genres'] = this.genres;
+    data['rating'] = this.rating;
+    data['trailer'] = this.trailer;
+    data['duration'] = this.duration;
     data['adult'] = this.adult;
-    data['deleted'] = this.deleted;
+    data['genre'] = this.genre;
     return data;
   }
 }

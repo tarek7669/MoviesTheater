@@ -7,6 +7,7 @@ import 'package:movies_theater/View/Components/Core/CustomAppBar.dart';
 import '../../ViewModel/Bloc/Home/home_cubit.dart';
 import '../Components/Core/Drawer.dart';
 import '../Components/Home/AllMoviesCarousel.dart';
+import '../Components/Home/UpcomingMoviesCarousel.dart';
 
 class Home extends StatelessWidget {
   Home({Key? key}) : super(key: key);
@@ -19,23 +20,23 @@ class Home extends StatelessWidget {
         .size;
     return Scaffold(
       key: drawerKey,
-      drawer: CustomDrawer(size),
+      drawer: CustomDrawer(context, size),
       backgroundColor: backColor,
 
       appBar: CustomAppBar(
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("Stars",
-                  style: TextStyle(
-                      color: primaryColor,
-                      fontSize: 35
-                  )
+              Container(
+                width: 70,
+                height: 50,
+                child: Image.asset("assets/images/stars.png")
               ),
               Text("Theater",
                 style: TextStyle(
                     color: Colors.white,
-                    fontSize: 15
+                    fontSize: 10,
+                    fontFamily: 'Salsa'
                 ),
               )
             ],
@@ -53,13 +54,15 @@ class Home extends StatelessWidget {
                     Text("Now Playing",
                       style: TextStyle(
                           color: Colors.white,
-                          fontSize: 35
+                          fontSize: 35,
+                          fontFamily: 'Salsa'
                       ),
                     ),
                     Text("Book Your Ticket Now",
                       style: TextStyle(
                           color: primaryColor,
-                          fontSize: 15
+                          fontSize: 15,
+                          fontFamily: 'Salsa'
                       ),
                     ),
                   ],
@@ -70,15 +73,18 @@ class Home extends StatelessWidget {
             SizedBox(height: 50),
 
             BlocProvider(
-              create: (context) => HomeCubit()..getMovies(),
+              create: (context) =>
+              HomeCubit()
+                ..getMovies(),
               child: BlocConsumer<HomeCubit, HomeState>(
                 listener: (context, state) {
                   // TODO: implement listener
                 },
                 builder: (context, state) {
                   HomeCubit movie = HomeCubit.get(context);
-                  return movie.moviesModel == null ? CircularProgressIndicator(color: primaryColor,)
-                  : AllMoviesCarousel(context, movie.moviesModel);
+                  return movie.moviesModel == null ? CircularProgressIndicator(
+                    color: primaryColor,)
+                      : AllMoviesCarousel(context, movie);
                 },
               ),
             ),
@@ -91,20 +97,24 @@ class Home extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text("Coming Soon",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 25
-                    )
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 25,
+                          fontFamily: 'Salsa'
+                      )
                   ),
-                  CarouselSlider(
-                    items: [],
-                    options: CarouselOptions(
-                      height: 266.0,
-                      scrollPhysics: BouncingScrollPhysics(),
-                      // autoPlay: true,
-                      // autoPlayCurve: Curves.bounceInOut
-                      aspectRatio: 10,
-
+                  BlocProvider(
+                    create: (context) => HomeCubit()..getCominSoonMovies(),
+                    child: BlocConsumer<HomeCubit, HomeState>(
+                      listener: (context, state) {
+                        // TODO: implement listener
+                      },
+                      builder: (context, state) {
+                        HomeCubit movie = HomeCubit.get(context);
+                        return movie.upcomingMovies.isEmpty ? CircularProgressIndicator(
+                          color: primaryColor,)
+                        : UpcomingMoviesCarousel(context, movie.upcomingMovies);
+                      },
                     ),
                   )
                 ],
