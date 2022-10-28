@@ -4,6 +4,7 @@ import '../../../ColorConsts.dart';
 
 AppBar CustomAppBar(Widget title, GlobalKey<ScaffoldState> drawerKey){
   return AppBar(
+    elevation: 0,
     toolbarHeight: 80,
     backgroundColor: backColor,
     title: title,
