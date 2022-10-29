@@ -1,17 +1,32 @@
-import 'package:carousel_slider/carousel_slider.dart';
+// import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_theater/ColorConsts.dart';
 import 'package:movies_theater/View/Components/Core/CustomAppBar.dart';
 
+import 'package:flutter_carousel_slider/carousel_slider.dart';
+import 'package:flutter_carousel_slider/carousel_slider_indicators.dart';
+import 'package:flutter_carousel_slider/carousel_slider_transforms.dart';
 import '../../ViewModel/Bloc/Home/home_cubit.dart';
 import '../Components/Core/Drawer.dart';
 import '../Components/Home/AllMoviesCarousel.dart';
 import '../Components/Home/UpcomingMoviesCarousel.dart';
+import 'MovieDetails.dart';
 
 class Home extends StatelessWidget {
   Home({Key? key}) : super(key: key);
   final GlobalKey<ScaffoldState> drawerKey = GlobalKey<ScaffoldState>();
+
+  List<String> images = [
+    "assets/images/spiderman.png",
+    "assets/images/uncharted.png",
+    "assets/images/Encanto.png"
+  ];
+  List<String> names = [
+    "Spiderman",
+    "Uncharted",
+    "Encanto"
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -71,6 +86,54 @@ class Home extends StatelessWidget {
             ),
 
             SizedBox(height: 50),
+
+            //TEST UNTIL SERVER IS BACK
+            // Container(
+            //   height: 280,
+            //   width: 180,
+            //   child: CarouselSlider.builder(
+            //
+            //       // key: _sliderKey,
+            //       unlimitedMode: true,
+            //       slideBuilder: (index) {
+            //         return InkResponse(
+            //           onTap: () {
+            //             Navigator.push(context, MaterialPageRoute(builder: (context)=>MovieDetails()));
+            //           },
+            //           child: Container(
+            //             width: 180,
+            //             height: 280,
+            //             decoration: BoxDecoration(
+            //                 borderRadius: BorderRadius.all(Radius.circular(40))
+            //             ),
+            //             child: Card(
+            //               child: Stack(
+            //                 children: [
+            //                   Image.asset(images[index], fit: BoxFit.fill, width: 180, height: 280,),
+            //                   Align(
+            //                     alignment: Alignment.bottomCenter,
+            //                     child: Expanded(
+            //                       child: Text(names[index],
+            //                         style: TextStyle(
+            //                             color: Colors.white,
+            //                             fontSize: 15,
+            //                             fontFamily: 'Salsa'
+            //                         ),
+            //                       ),
+            //                     ),
+            //                   ),
+            //                 ],
+            //               ),
+            //             ),
+            //           ),
+            //         );
+            //       },
+            //       slideTransform: RotateDownTransform(),
+            //       slideIndicator: CircularSlideIndicator(
+            //         padding: EdgeInsets.only(bottom: 32),
+            //       ),
+            //       itemCount: images.length),
+            // ),
 
             BlocProvider(
               create: (context) =>

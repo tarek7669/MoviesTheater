@@ -14,7 +14,6 @@ Widget AllMoviesCarousel(BuildContext context, HomeCubit movie){
         items: movie.upcomingMovies.map((index) {
           return Builder(
             builder: (context){
-
               return Container(
                 width: 180,
                 height: 280,
