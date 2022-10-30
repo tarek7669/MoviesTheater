@@ -11,7 +11,6 @@ Widget UpcomingMoviesCarousel(BuildContext context, List<UpcomingMoviesModel> up
 
       return Builder(
         builder: (context){
-          debugPrint("\n\n\n" + upcomingMovies.length.toString() + "\n\n\n");
           return Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(20)),

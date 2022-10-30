@@ -32,16 +32,11 @@ class HomeCubit extends Cubit<HomeState> {
         for(var movie in value.data){
           moviesModel.add(MoviesModel.fromJson(movie));
         }
-
-        // moviesModel = MoviesModel.fromJson(value.data);
-        // message = "success";
         emit(AllMoviesSuccess());
       }else{
-        // message = "error";
         emit(AllMoviesError());
       }
     }).catchError((e) {
-      // message = "error";
       emit(AllMoviesError());
     });
   }

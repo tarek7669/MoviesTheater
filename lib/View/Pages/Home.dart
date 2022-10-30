@@ -149,7 +149,22 @@ class Home extends StatelessWidget {
                     child: CircularProgressIndicator(
                       color: primaryColor,),
                   )
-                      : AllMoviesCarousel(context, movie);
+                      : movie.moviesModel.length == 1 ?
+                    Center(
+                      child: Container(
+                        height: size.height * 0.3,
+                          width: size.width * 0.5,
+                          decoration: BoxDecoration(
+                              color: backColor,
+                              borderRadius: BorderRadius.all(Radius.circular(20)),
+                              image: DecorationImage(
+                                image: NetworkImage(movie.moviesModel[0].imageUrl.toString()),
+                                fit: BoxFit.fill,
+                              )
+                          ),
+                      ),
+                    )
+                  :AllMoviesCarousel(context, movie);
                 },
               ),
             ),
@@ -179,6 +194,21 @@ class Home extends StatelessWidget {
                         return movie.upcomingMovies.isEmpty ? Center(
                           child: CircularProgressIndicator(
                             color: primaryColor,),
+                        )
+                        : movie.upcomingMovies.length == 1 ?
+                        Center(
+                          child: Container(
+                            height: size.height * 0.3,
+                            width: size.width * 0.5,
+                            decoration: BoxDecoration(
+                                color: backColor,
+                                borderRadius: BorderRadius.all(Radius.circular(20)),
+                                image: DecorationImage(
+                                  image: NetworkImage(movie.upcomingMovies[0].imageUrl.toString()),
+                                  fit: BoxFit.fill,
+                                )
+                            ),
+                          ),
                         )
                         : UpcomingMoviesCarousel(context, movie.upcomingMovies);
                       },
