@@ -145,8 +145,10 @@ class Home extends StatelessWidget {
                 },
                 builder: (context, state) {
                   HomeCubit movie = HomeCubit.get(context);
-                  return movie.moviesModel == null ? CircularProgressIndicator(
-                    color: primaryColor,)
+                  return movie.moviesModel.isEmpty ? Center(
+                    child: CircularProgressIndicator(
+                      color: primaryColor,),
+                  )
                       : AllMoviesCarousel(context, movie);
                 },
               ),
@@ -174,8 +176,10 @@ class Home extends StatelessWidget {
                       },
                       builder: (context, state) {
                         HomeCubit movie = HomeCubit.get(context);
-                        return movie.upcomingMovies.isEmpty ? CircularProgressIndicator(
-                          color: primaryColor,)
+                        return movie.upcomingMovies.isEmpty ? Center(
+                          child: CircularProgressIndicator(
+                            color: primaryColor,),
+                        )
                         : UpcomingMoviesCarousel(context, movie.upcomingMovies);
                       },
                     ),

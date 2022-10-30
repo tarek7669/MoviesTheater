@@ -28,6 +28,9 @@ Widget UpcomingMoviesCarousel(BuildContext context, List<UpcomingMoviesModel> up
                     fit: BoxFit.fill,
                   )
                 ),
+                child: Center(
+                  child: Icon(Icons.play_circle_outline_rounded, color: Colors.white, size: 60,),
+                ),
               ),
             ),
           );
