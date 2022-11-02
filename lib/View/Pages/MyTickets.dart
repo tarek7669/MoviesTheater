@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:movies_theater/ViewModel/Bloc/Tickets/ticket_cubit.dart';
 
 import '../../ColorConsts.dart';
@@ -24,14 +25,11 @@ class MyTickets extends StatelessWidget {
       drawer: CustomDrawer(context, size),
       appBar: CustomAppBar(
           Text("My Tickets",
-            style: TextStyle(
-                color: Colors.white
-            ),
-
+            style: GoogleFonts.getFont('Roboto', color: textColor, fontWeight: FontWeight.w700, fontSize: 20),
           ), drawerKey
       ),
       body: Container(
-        padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
+        padding: EdgeInsets.fromLTRB(20, 46, 20, 0),
         child: SingleChildScrollView(
           physics: BouncingScrollPhysics(),
           child: Column(
@@ -39,11 +37,7 @@ class MyTickets extends StatelessWidget {
               Row(
                 children: [
                   Text("Today's ",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 25
-                    ),
+                    style: GoogleFonts.getFont('Roboto', color: textColor, fontWeight: FontWeight.w700, fontSize: 20),
                   ),
                   Text("tickets",
                     style: TextStyle(
@@ -80,7 +74,7 @@ class MyTickets extends StatelessWidget {
               // ),
 
 
-              SizedBox(height: size.height / 20,),
+              SizedBox(height: 38.5),
 
               Container(
                 width: size.width,
@@ -163,6 +157,8 @@ class MyTickets extends StatelessWidget {
                 ),
               ),
 
+              SizedBox(height: 25),
+
               Row(
                 children: [
                   Text("Upcoming ",
@@ -181,7 +177,7 @@ class MyTickets extends StatelessWidget {
                 ],
               ),
 
-              SizedBox(height: size.height / 20,),
+              SizedBox(height: 25),
 
               Container(
                 width: size.width,
@@ -258,7 +254,7 @@ class MyTickets extends StatelessWidget {
                 ),
               ),
 
-              SizedBox(height: size.height / 20,),
+              SizedBox(height: 25),
 
               Container(
                 width: size.width,

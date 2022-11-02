@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../../ColorConsts.dart';
 import '../../../ViewModel/Database/SharedPreferences.dart';
@@ -8,12 +10,13 @@ import '../../Pages/Login.dart';
 Widget CustomDrawer(BuildContext context, Size size){
   return Container(
     width: (size.width / 3) * 2,
+    // width: 231,
     color: Colors.grey[900],
 
-    padding: EdgeInsets.fromLTRB(40, 0, 40, 0),
+    padding: EdgeInsets.fromLTRB(29, 40, 40, 0),
     child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -22,33 +25,32 @@ Widget CustomDrawer(BuildContext context, Size size){
               minRadius: 25,
               child: Image.asset("assets/images/CircleAvatar.png"),
             ),
-            SizedBox(width: 10),
+            SizedBox(width: 23),
             Expanded(
               child: Text("Liam Zak",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 25,
-                ),
+                style: GoogleFonts.getFont('Roboto', color: textColor, fontSize: 19, fontWeight: FontWeight.w700)
               ),
             ),
           ],
         ),
-        SizedBox(height: 20),
-        DrawerListTile("Account", "accountDrawer.png", (){}),
-        ListTile(
-          title: Text('Settings',
-            style: TextStyle(
-                color: Colors.white
-            ),
-          ),
-          leading: Icon(CupertinoIcons.settings,
-            color: primaryColor,
-          ),
-        ),
+        SizedBox(height: 43),
+        DrawerListTile("Account", "account.svg", (){}),
+        // ListTile(
+        //   title: Text('Settings',
+        //     style: TextStyle(
+        //         color: Colors.white
+        //     ),
+        //   ),
+        //   leading: SvgPicture.asset("assets/icons/setting.svg",
+        //     color: primaryColor,
+        //   ),
+        // ),
 
-        DrawerListTile("About", "aboutDrawer.png", (){}),
+        DrawerListTile("Settings", "setting.svg", (){}),
 
-        DrawerListTile("Logout", "logoutDrawer.png", () {
+        DrawerListTile("About", "about.svg", (){}),
+
+        DrawerListTile("Logout", "logout.svg", () {
 
           SharedPref.deleteAll().then((value) {
             if(value)
@@ -59,8 +61,6 @@ Widget CustomDrawer(BuildContext context, Size size){
                 content: Text("Something went wrong in logout"),
               ));
           });
-
-
         }),
       ],
     ),
@@ -74,7 +74,7 @@ Widget DrawerListTile(String title, String image_path, onTap){
           color: Colors.white
       ),
     ),
-    leading: Image.asset("assets/icons/$image_path"),
+    leading: SvgPicture.asset("assets/icons/$image_path"),
     onTap: onTap,
   );
 }

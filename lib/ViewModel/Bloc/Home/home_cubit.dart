@@ -25,17 +25,14 @@ class HomeCubit extends Cubit<HomeState> {
   PageController pageController = PageController(initialPage: 0, viewportFraction: 1);
   CarouselController carouselController = CarouselController();
 
-  void getMovies(){
 
+
+  void getMovies(){
     DioHelper.getData(url: moviesEndPoint, token: Token).then((value) {
-      if(value.statusCode == 200){
         for(var movie in value.data){
           moviesModel.add(MoviesModel.fromJson(movie));
         }
         emit(AllMoviesSuccess());
-      }else{
-        emit(AllMoviesError());
-      }
     }).catchError((e) {
       emit(AllMoviesError());
     });

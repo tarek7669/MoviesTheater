@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:movies_theater/ColorConsts.dart';
 
 import '../Components/Core/CustomAppBar.dart';
@@ -15,7 +16,7 @@ class TicketDetails extends StatelessWidget {
         backgroundColor: backColor,
         elevation: 0,
         title: Text("View Ticket",
-          style: TextStyle(color: Colors.white),
+          style: GoogleFonts.getFont('Roboto', color: textColor, fontWeight: FontWeight.w700, fontSize: 20),
         ),
         centerTitle: true,
         leading: InkResponse(
@@ -42,130 +43,162 @@ class TicketDetails extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text("Movie: Spiderman No Way Home",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20
-                          ),
+                          style: GoogleFonts.getFont('Roboto', color: textColor, fontWeight: FontWeight.w600, fontSize: 15),
                         ),
                       ],
                     ),
 
-                    SizedBox(height: size.height * 0.04),
+                    SizedBox(height: 25),
+
 
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text("Name",
-                              style: TextStyle(
-                                  color: Colors.grey[700],
-                                  fontSize: 15
-                              ),
+                              style: GoogleFonts.getFont('Roboto', color: textColor.withOpacity(0.46), fontWeight: FontWeight.w400, fontSize: 9),
                             ),
+                            SizedBox(height: 10),
                             Text("Ahmed Abaza",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20
-                              ),
+                              style: GoogleFonts.getFont('Roboto', color: textColor, fontWeight: FontWeight.w500, fontSize: 12),
+                            ),
+
+                            SizedBox(height: 25,),
+
+                            Text("Date",
+                              style: GoogleFonts.getFont('Roboto', color: textColor.withOpacity(0.46), fontWeight: FontWeight.w400, fontSize: 9),
+                            ),
+                            SizedBox(height: 10),
+                            Text("20 Feb 2022",
+                              style: GoogleFonts.getFont('Roboto', color: textColor, fontWeight: FontWeight.w500, fontSize: 12),
+                            ),
+
+                            SizedBox(height: 25,),
+
+                            Text("NP Order",
+                              style: GoogleFonts.getFont('Roboto', color: textColor.withOpacity(0.46), fontWeight: FontWeight.w400, fontSize: 9),
+                            ),
+                            SizedBox(height: 10),
+                            Text("7283603745",
+                              style: GoogleFonts.getFont('Roboto', color: textColor, fontWeight: FontWeight.w500, fontSize: 12),
                             )
                           ],
-                        ),Column(
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text("Seats",
-                              style: TextStyle(
-                                  color: Colors.grey[700],
-                                  fontSize: 15
-                              ),
+                              style: GoogleFonts.getFont('Roboto', color: textColor.withOpacity(0.46), fontWeight: FontWeight.w400, fontSize: 9),
                             ),
+                            SizedBox(height: 10),
                             Text("G5, G6, G7, G8",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20
-                              ),
-                            )
-                          ],
-                        ),
-                      ],
-                    ),
-
-                    SizedBox(height: size.height * 0.04),
-
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          children: [
-                            Text("Date",
-                              style: TextStyle(
-                                  color: Colors.grey[700],
-                                  fontSize: 15
-                              ),
+                              style: GoogleFonts.getFont('Roboto', color: textColor, fontWeight: FontWeight.w500, fontSize: 12),
                             ),
-                            Text("20 Feb 2022",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20
-                              ),
-                            )
-                          ],
-                        ),Column(
-                          children: [
+
+                            SizedBox(height: 25,),
+
                             Text("Time",
-                              style: TextStyle(
-                                  color: Colors.grey[700],
-                                  fontSize: 15
-                              ),
+                              style: GoogleFonts.getFont('Roboto', color: textColor.withOpacity(0.46), fontWeight: FontWeight.w400, fontSize: 9),
                             ),
+                            SizedBox(height: 10),
                             Text("9:00 pm",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20
-                              ),
-                            )
-                          ],
-                        ),
-                      ],
-                    ),
-
-                    SizedBox(height: size.height * 0.04),
-
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          children: [
-                            Text("NP Order",
-                              style: TextStyle(
-                                  color: Colors.grey[700],
-                                  fontSize: 15
-                              ),
+                              style: GoogleFonts.getFont('Roboto', color: textColor, fontWeight: FontWeight.w500, fontSize: 12),
                             ),
-                            Text("7283603745",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20
-                              ),
-                            )
-                          ],
-                        ),Column(
-                          children: [
+
+                            SizedBox(height: 25,),
+
                             Text("Price",
-                              style: TextStyle(
-                                  color: Colors.grey[700],
-                                  fontSize: 15
-                              ),
+                              style: GoogleFonts.getFont('Roboto', color: textColor.withOpacity(0.46), fontWeight: FontWeight.w400, fontSize: 9),
                             ),
+                            SizedBox(height: 10),
                             Text("150 EGP",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20
-                              ),
+                              style: GoogleFonts.getFont('Roboto', color: textColor, fontWeight: FontWeight.w500, fontSize: 12),
                             )
                           ],
-                        ),
+                        )
                       ],
                     ),
+
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //   children: [
+                    //     Column(
+                    //       children: [
+                    //         Text("Name",
+                    //           style: GoogleFonts.getFont('Roboto', color: textColor.withOpacity(0.46), fontWeight: FontWeight.w400, fontSize: 9),
+                    //         ),
+                    //         Text("Ahmed Abaza",
+                    //           style: GoogleFonts.getFont('Roboto', color: textColor, fontWeight: FontWeight.w500, fontSize: 12),
+                    //         )
+                    //       ],
+                    //     ),Column(
+                    //       children: [
+                    //         Text("Seats",
+                    //           style: GoogleFonts.getFont('Roboto', color: textColor.withOpacity(0.46), fontWeight: FontWeight.w400, fontSize: 9),
+                    //         ),
+                    //         Text("G5, G6, G7, G8",
+                    //           style: GoogleFonts.getFont('Roboto', color: textColor, fontWeight: FontWeight.w500, fontSize: 12),
+                    //         )
+                    //       ],
+                    //     ),
+                    //   ],
+                    // ),
+                    //
+                    // SizedBox(height: size.height * 0.04),
+                    //
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //   children: [
+                    //     Column(
+                    //       children: [
+                    //         Text("Date",
+                    //           style: GoogleFonts.getFont('Roboto', color: textColor.withOpacity(0.46), fontWeight: FontWeight.w400, fontSize: 9),
+                    //         ),
+                    //         Text("20 Feb 2022",
+                    //           style: GoogleFonts.getFont('Roboto', color: textColor, fontWeight: FontWeight.w500, fontSize: 12),
+                    //         )
+                    //       ],
+                    //     ),Column(
+                    //       children: [
+                    //         Text("Time",
+                    //           style: GoogleFonts.getFont('Roboto', color: textColor.withOpacity(0.46), fontWeight: FontWeight.w400, fontSize: 9),
+                    //         ),
+                    //         Text("9:00 pm",
+                    //           style: GoogleFonts.getFont('Roboto', color: textColor, fontWeight: FontWeight.w500, fontSize: 12),
+                    //         )
+                    //       ],
+                    //     ),
+                    //   ],
+                    // ),
+                    //
+                    // SizedBox(height: size.height * 0.04),
+                    //
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //   children: [
+                    //     Column(
+                    //       children: [
+                    //         Text("NP Order",
+                    //           style: GoogleFonts.getFont('Roboto', color: textColor.withOpacity(0.46), fontWeight: FontWeight.w400, fontSize: 9),
+                    //         ),
+                    //         Text("7283603745",
+                    //           style: GoogleFonts.getFont('Roboto', color: textColor, fontWeight: FontWeight.w500, fontSize: 12),
+                    //         )
+                    //       ],
+                    //     ),Column(
+                    //       children: [
+                    //         Text("Price",
+                    //           style: GoogleFonts.getFont('Roboto', color: textColor.withOpacity(0.46), fontWeight: FontWeight.w400, fontSize: 9),
+                    //         ),
+                    //         Text("150 EGP",
+                    //           style: GoogleFonts.getFont('Roboto', color: textColor, fontWeight: FontWeight.w500, fontSize: 12),
+                    //         )
+                    //       ],
+                    //     ),
+                    //   ],
+                    // ),
 
                   ],
                 ),

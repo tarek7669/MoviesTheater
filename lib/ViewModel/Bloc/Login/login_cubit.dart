@@ -23,8 +23,13 @@ class LoginCubit extends Cubit<LoginState> {
   String message = '';
   LoginModel? loginModel;
 
+  bool is_loading = false;
+
 
   void Login(BuildContext context) {
+
+    is_loading = true;
+    emit(LoginLoading());
 
     var temp = {
       "email": emailController.text,
@@ -32,7 +37,6 @@ class LoginCubit extends Cubit<LoginState> {
     };
 
      DioHelper.postData(url: loginEndPoint, data: temp).then((value) {
-      if (value.statusCode == 200) {
         Token = value.data['accessToken'];
         SharedPref.setToken("token", Token);
         if (Token != '' && Token != null && Token.isNotEmpty) {
@@ -41,14 +45,19 @@ class LoginCubit extends Cubit<LoginState> {
               context, MaterialPageRoute(builder: (context) => BottomNavBar()));
         } else {
           message = 'Token Error';
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text(message),
+          ));
+          emit(LoginError());
         }
+        is_loading = false;
         emit(LoginSuccess());
-      }
-      else{
-        message = 'error';
-      }
     }).catchError((e) {
-      message = "error";
+      is_loading = false;
+      message = "Please make sure you entered your credentials correctly";
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(message),
+      ));
       emit(LoginError());
     });
   }

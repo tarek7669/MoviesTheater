@@ -13,7 +13,7 @@ AppBar CustomAppBar(Widget title, GlobalKey<ScaffoldState> drawerKey){
         onTap: () {
           drawerKey.currentState!.openDrawer();
         },
-        child: Image.asset("assets/icons/drawerIcon.png")
+        child: Image.asset("assets/icons/drawerIcon.png", height: 15, width: 21,)
     ),
   );
 }

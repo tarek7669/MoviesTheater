@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../ColorConsts.dart';
 import 'Home.dart';
@@ -49,7 +50,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
               label: ""
           ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.search,
+              icon: SvgPicture.asset("assets/icons/search.svg",
                 color: _selectedIndex == 2 ? primaryColor : unselectedButton,
               ),
               label: ""

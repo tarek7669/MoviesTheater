@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:movies_theater/ViewModel/Database/SharedPreferences.dart';
-
+import 'package:google_fonts/google_fonts.dart';
 import '../../ColorConsts.dart';
 import '../../Constants.dart';
 import 'BottomNavigationBar.dart';
@@ -48,20 +48,10 @@ class _SplashState extends State<Splash> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Text("Stars",
-            //   style: TextStyle(
-            //     color: primaryColor,
-            //     fontSize: 65,
-            //     fontFamily: 'Salsa'
-            //   ),
-            // ),
-            Image.asset("assets/images/stars.png"),
+            Image.asset("assets/images/stars.png", width: 160, height: 122,),
             Text("Theater",
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 35,
-                fontFamily: 'Salsa'
-              ),)
+              style: GoogleFonts.getFont('Salsa', color: textColor, fontSize: 25, fontWeight: FontWeight.w400),
+            )
           ]
         ),
       )

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../ColorConsts.dart';
 import '../Components/Core/CustomAppBar.dart';
@@ -20,9 +21,7 @@ class Search extends StatelessWidget {
       drawer: CustomDrawer(context, size),
       appBar:  CustomAppBar(
         Text("Search",
-          style: TextStyle(
-              color: Colors.white
-          ),
+          style: GoogleFonts.getFont('Roboto', color: textColor, fontWeight: FontWeight.w700, fontSize: 20),
         ),drawerKey
       ),
 

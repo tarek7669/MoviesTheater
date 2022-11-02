@@ -1,6 +1,7 @@
 // import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:movies_theater/ColorConsts.dart';
 import 'package:movies_theater/View/Components/Core/CustomAppBar.dart';
 
@@ -45,14 +46,10 @@ class Home extends StatelessWidget {
               Container(
                 width: 70,
                 height: 50,
-                child: Image.asset("assets/images/stars.png")
+                child: Image.asset("assets/images/stars.png", width: 65, height: 50,)
               ),
               Text("Theater",
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 10,
-                    fontFamily: 'Salsa'
-                ),
+                style: GoogleFonts.getFont('Salsa', fontSize: 9, color: textColor, fontWeight: FontWeight.w400)
               )
             ],
           ), drawerKey),
@@ -62,30 +59,23 @@ class Home extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              padding: EdgeInsets.only(top: 50),
+              padding: EdgeInsets.only(top: 21),
               child: Center(
                 child: Column(
                   children: [
                     Text("Now Playing",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 35,
-                          fontFamily: 'Salsa'
-                      ),
+                      style: GoogleFonts.getFont('Salsa', fontSize:33, color: textColor, fontWeight: FontWeight.w400),
                     ),
+                    SizedBox(height: 8,),
                     Text("Book Your Ticket Now",
-                      style: TextStyle(
-                          color: primaryColor,
-                          fontSize: 15,
-                          fontFamily: 'Salsa'
-                      ),
+                      style: GoogleFonts.getFont('Salsa', fontSize:10, color: primaryColor, fontWeight: FontWeight.w400),
                     ),
                   ],
                 ),
               ),
             ),
 
-            SizedBox(height: 50),
+            SizedBox(height: 42),
 
             //TEST UNTIL SERVER IS BACK
             // Container(
@@ -169,53 +159,49 @@ class Home extends StatelessWidget {
               ),
             ),
 
-            SizedBox(height: 70),
+            SizedBox(height: 102),
 
-            Container(
-              padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text("Coming Soon",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 25,
-                          fontFamily: 'Salsa'
-                      )
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  padding: EdgeInsets.fromLTRB(29, 0, 20, 5),
+                  child: Text("Coming Soon",
+                    style: GoogleFonts.getFont('Roboto', fontSize:17, color: textColor, fontWeight: FontWeight.w700),
                   ),
-                  BlocProvider(
-                    create: (context) => HomeCubit()..getCominSoonMovies(),
-                    child: BlocConsumer<HomeCubit, HomeState>(
-                      listener: (context, state) {
-                        // TODO: implement listener
-                      },
-                      builder: (context, state) {
-                        HomeCubit movie = HomeCubit.get(context);
-                        return movie.upcomingMovies.isEmpty ? Center(
-                          child: CircularProgressIndicator(
-                            color: primaryColor,),
-                        )
-                        : movie.upcomingMovies.length == 1 ?
-                        Center(
-                          child: Container(
-                            height: size.height * 0.3,
-                            width: size.width * 0.5,
-                            decoration: BoxDecoration(
-                                color: backColor,
-                                borderRadius: BorderRadius.all(Radius.circular(20)),
-                                image: DecorationImage(
-                                  image: NetworkImage(movie.upcomingMovies[0].imageUrl.toString()),
-                                  fit: BoxFit.fill,
-                                )
-                            ),
+                ),
+                BlocProvider(
+                  create: (context) => HomeCubit()..getCominSoonMovies(),
+                  child: BlocConsumer<HomeCubit, HomeState>(
+                    listener: (context, state) {
+                      // TODO: implement listener
+                    },
+                    builder: (context, state) {
+                      HomeCubit movie = HomeCubit.get(context);
+                      return movie.upcomingMovies.isEmpty ? Center(
+                        child: CircularProgressIndicator(
+                          color: primaryColor,),
+                      )
+                      : movie.upcomingMovies.length == 1 ?
+                      Center(
+                        child: Container(
+                          height: size.height * 0.3,
+                          width: size.width * 0.5,
+                          decoration: BoxDecoration(
+                              color: backColor,
+                              borderRadius: BorderRadius.all(Radius.circular(20)),
+                              image: DecorationImage(
+                                image: NetworkImage(movie.upcomingMovies[0].imageUrl.toString()),
+                                fit: BoxFit.fill,
+                              )
                           ),
-                        )
-                        : UpcomingMoviesCarousel(context, movie.upcomingMovies);
-                      },
-                    ),
-                  )
-                ],
-              ),
+                        ),
+                      )
+                      : UpcomingMoviesCarousel(context, movie.upcomingMovies);
+                    },
+                  ),
+                )
+              ],
             ),
           ],
         ),
