@@ -9,3 +9,5 @@ class AllMoviesError extends HomeState {}
 
 class UpcomingMoviesSuccess extends HomeState {}
 class UpcomingMoviesError extends HomeState {}
+
+class BackgroundChanged extends HomeState {}

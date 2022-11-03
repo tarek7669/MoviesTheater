@@ -11,7 +11,7 @@ Widget CustomDrawer(BuildContext context, Size size){
   return Container(
     width: (size.width / 3) * 2,
     // width: 231,
-    color: Colors.grey[900],
+    color: Color(0xFF121212),
 
     padding: EdgeInsets.fromLTRB(29, 40, 40, 0),
     child: Column(
@@ -35,16 +35,6 @@ Widget CustomDrawer(BuildContext context, Size size){
         ),
         SizedBox(height: 43),
         DrawerListTile("Account", "account.svg", (){}),
-        // ListTile(
-        //   title: Text('Settings',
-        //     style: TextStyle(
-        //         color: Colors.white
-        //     ),
-        //   ),
-        //   leading: SvgPicture.asset("assets/icons/setting.svg",
-        //     color: primaryColor,
-        //   ),
-        // ),
 
         DrawerListTile("Settings", "setting.svg", (){}),
 
@@ -71,7 +61,8 @@ Widget DrawerListTile(String title, String image_path, onTap){
   return ListTile(
     title: Text(title,
       style: TextStyle(
-          color: Colors.white
+          color: Colors.white,
+        fontSize: 14
       ),
     ),
     leading: SvgPicture.asset("assets/icons/$image_path"),

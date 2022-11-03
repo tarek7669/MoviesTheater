@@ -25,7 +25,7 @@ class HomeCubit extends Cubit<HomeState> {
   PageController pageController = PageController(initialPage: 0, viewportFraction: 1);
   CarouselController carouselController = CarouselController();
 
-
+  int backgroundIndex = 0;
 
   void getMovies(){
     DioHelper.getData(url: moviesEndPoint, token: Token).then((value) {
@@ -52,5 +52,10 @@ class HomeCubit extends Cubit<HomeState> {
     }).catchError((e){
       emit(UpcomingMoviesError());
     });
+  }
+
+  void changeBackground(int index){
+    backgroundIndex = index;
+    emit(BackgroundChanged());
   }
 }

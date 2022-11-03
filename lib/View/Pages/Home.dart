@@ -1,13 +1,15 @@
 // import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movies_theater/ColorConsts.dart';
 import 'package:movies_theater/View/Components/Core/CustomAppBar.dart';
-
+import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter_carousel_slider/carousel_slider.dart';
 import 'package:flutter_carousel_slider/carousel_slider_indicators.dart';
 import 'package:flutter_carousel_slider/carousel_slider_transforms.dart';
+import 'package:movies_theater/View/Pages/BottomNavigationBar.dart';
 import '../../ViewModel/Bloc/Home/home_cubit.dart';
 import '../Components/Core/Drawer.dart';
 import '../Components/Home/AllMoviesCarousel.dart';
@@ -75,91 +77,166 @@ class Home extends StatelessWidget {
               ),
             ),
 
-            SizedBox(height: 42),
+            // SizedBox(height: 42),
 
             //TEST UNTIL SERVER IS BACK
+
+
+
             // Container(
-            //   height: 280,
-            //   width: 180,
-            //   child: CarouselSlider.builder(
-            //
-            //       // key: _sliderKey,
-            //       unlimitedMode: true,
-            //       slideBuilder: (index) {
-            //         return InkResponse(
-            //           onTap: () {
-            //             Navigator.push(context, MaterialPageRoute(builder: (context)=>MovieDetails()));
-            //           },
-            //           child: Container(
-            //             width: 180,
-            //             height: 280,
-            //             decoration: BoxDecoration(
-            //                 borderRadius: BorderRadius.all(Radius.circular(40))
-            //             ),
-            //             child: Card(
-            //               child: Stack(
-            //                 children: [
-            //                   Image.asset(images[index], fit: BoxFit.fill, width: 180, height: 280,),
-            //                   Align(
-            //                     alignment: Alignment.bottomCenter,
-            //                     child: Expanded(
-            //                       child: Text(names[index],
-            //                         style: TextStyle(
-            //                             color: Colors.white,
-            //                             fontSize: 15,
-            //                             fontFamily: 'Salsa'
-            //                         ),
-            //                       ),
-            //                     ),
-            //                   ),
-            //                 ],
-            //               ),
-            //             ),
-            //           ),
-            //         );
-            //       },
-            //       slideTransform: RotateDownTransform(),
-            //       slideIndicator: CircularSlideIndicator(
-            //         padding: EdgeInsets.only(bottom: 32),
-            //       ),
-            //       itemCount: images.length),
+            //   height: size.height * 0.5,
+            //   child: Swiper(
+            //     itemBuilder: (BuildContext context,int index){
+            //       return Image.asset(images[index],fit: BoxFit.fill,);
+            //     },
+            //     itemCount: images.length,
+            //     pagination: SwiperPagination(),
+            //     control: SwiperControl(),
+            //   ),
             // ),
 
             BlocProvider(
-              create: (context) =>
-              HomeCubit()
-                ..getMovies(),
+              create: (context) => HomeCubit(),
               child: BlocConsumer<HomeCubit, HomeState>(
                 listener: (context, state) {
                   // TODO: implement listener
                 },
                 builder: (context, state) {
-                  HomeCubit movie = HomeCubit.get(context);
-                  return movie.moviesModel.isEmpty ? Center(
-                    child: CircularProgressIndicator(
-                      color: primaryColor,),
-                  )
-                      : movie.moviesModel.length == 1 ?
-                    Center(
-                      child: Container(
-                        height: size.height * 0.3,
-                          width: size.width * 0.5,
-                          decoration: BoxDecoration(
-                              color: backColor,
-                              borderRadius: BorderRadius.all(Radius.circular(20)),
-                              image: DecorationImage(
-                                image: NetworkImage(movie.moviesModel[0].imageUrl.toString()),
-                                fit: BoxFit.fill,
-                              )
-                          ),
+                  HomeCubit home = HomeCubit.get(context);
+                  return Container(
+                    // color: Colors.red,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage(images[home.backgroundIndex]),
+                          fit: BoxFit.fill
+                        )
                       ),
-                    )
-                  :AllMoviesCarousel(context, movie);
+                      height: size.height * 0.5,
+                      child: Stack(
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                  begin: FractionalOffset.topCenter,
+                                  end: FractionalOffset.bottomCenter,
+                                  colors: [
+                                    backColor.withOpacity(1),
+                                    backColor.withOpacity(0.0),
+                                    backColor.withOpacity(1),
+                                  ],
+                                  // stops: [
+                                  //   0.0,
+                                  //   1.0,
+                                  //   2.0
+                                  // ]
+                              ),
+                              // borderRadius: BorderRadius.all(Radius.circular(20)),
+                            ),
+                          ),
+                          Swiper(
+                            layout: SwiperLayout.CUSTOM,
+                            onIndexChanged: (index){
+                              home.changeBackground(index);
+                            },
+                            customLayoutOption: CustomLayoutOption(
+
+                                startIndex: -1,
+                                stateCount: images.length
+                            )..addRotate([
+                              -45.0/180,
+                              0.0,
+                              45.0/180
+                            ])..addTranslate([
+                              Offset(-200.0, -20.0),
+                              Offset(0.0, 0.0),
+                              Offset(200.0, -20.0)
+                            ]),
+                            itemWidth: 150.0,
+                            itemHeight: 200.0,
+                            // pagination: SwiperPagination(),
+                            itemBuilder: (context, index) {
+                              return Stack(
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                          image: AssetImage(images[index]),
+                                          fit: BoxFit.fill
+                                      )
+                                    ),
+                                  ),
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      gradient: LinearGradient(
+                                        begin: FractionalOffset.topCenter,
+                                        end: FractionalOffset.bottomCenter,
+                                        colors: [
+                                          backColor.withOpacity(0.0),
+                                          backColor.withOpacity(1.0),
+                                        ],
+                                        stops: [
+                                          0.0,
+                                          1.0,
+                                        ]
+                                      ),
+                                      // borderRadius: BorderRadius.all(Radius.circular(20)),
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.fromLTRB(12, 150, 0, 22),
+                                    child: Center(
+                                      child: Text(names[index].toString(),
+                                        style: GoogleFonts.getFont('Roboto', color: textColor, fontWeight: FontWeight.w700, fontSize: 12),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              );
+                            },
+                            itemCount: images.length,
+                          ),
+                        ],
+                      )
+                  );
                 },
               ),
             ),
 
-            SizedBox(height: 102),
+            // BlocProvider(
+            //   create: (context) =>
+            //   HomeCubit()
+            //     ..getMovies(),
+            //   child: BlocConsumer<HomeCubit, HomeState>(
+            //     listener: (context, state) {
+            //       // TODO: implement listener
+            //     },
+            //     builder: (context, state) {
+            //       HomeCubit movie = HomeCubit.get(context);
+            //       return movie.moviesModel.isEmpty ? Center(
+            //         child: CircularProgressIndicator(
+            //           color: primaryColor,),
+            //       )
+            //           : movie.moviesModel.length == 1 ?
+            //         Center(
+            //           child: Container(
+            //             height: size.height * 0.3,
+            //               width: size.width * 0.5,
+            //               decoration: BoxDecoration(
+            //                   color: backColor,
+            //                   borderRadius: BorderRadius.all(Radius.circular(20)),
+            //                   image: DecorationImage(
+            //                     image: NetworkImage(movie.moviesModel[0].imageUrl.toString()),
+            //                     fit: BoxFit.fill,
+            //                   )
+            //               ),
+            //           ),
+            //         )
+            //       :AllMoviesCarousel(context, movie);
+            //     },
+            //   ),
+            // ),
+
+            SizedBox(height: 22),
 
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
