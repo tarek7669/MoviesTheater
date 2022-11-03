@@ -121,7 +121,7 @@ class Home extends StatelessWidget {
                                   end: FractionalOffset.bottomCenter,
                                   colors: [
                                     backColor.withOpacity(1),
-                                    backColor.withOpacity(0.0),
+                                    backColor.withOpacity(0.70),
                                     backColor.withOpacity(1),
                                   ],
                                   // stops: [
