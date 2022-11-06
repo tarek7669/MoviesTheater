@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'View/Pages/Login.dart';
-import 'View/Pages/Splash.dart';
-import 'ViewModel/Database/Network/dio_helper.dart';
-import 'ViewModel/Database/SharedPreferences.dart';
+import 'View/Pages/login_screen.dart';
+import 'View/Pages/splash_screen.dart';
+import 'view_model/Database/Network/dio_helper.dart';
+import 'view_model/Database/SharedPreferences.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
