@@ -34,7 +34,12 @@ Widget SelectTime(BuildContext context) {
               itemBuilder: (context, index, realidx) {
                 return InkResponse(
                   onTap: (){
-                    movie.MovieDaySelected(index);
+                    // debugPrint("\n\n\n\ index --> ${index.toString()} \n\n\n");
+                    movie.MovieDaySelected(
+                      index,
+                      movie.getDate().day + index - 2,
+                      movie.months[movie.getDate().month]
+                    );
                   },
                   child: Container(
                     height: 62,

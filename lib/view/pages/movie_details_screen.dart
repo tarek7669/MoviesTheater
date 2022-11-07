@@ -18,7 +18,7 @@ class MovieDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return BlocProvider(
-      create: (context) => MovieCubit(),
+      create: (context) => MovieCubit()..init(),
       child: Scaffold(
         bottomNavigationBar: InkResponse(
           onTap: (){

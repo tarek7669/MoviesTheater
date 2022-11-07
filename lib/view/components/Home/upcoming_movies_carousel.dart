@@ -5,6 +5,7 @@ import 'package:movies_theater/View/Pages/movie_details_screen.dart';
 
 import '../../../constants/color_consts.dart';
 import '../../../Model/upcoming_movies_model.dart';
+import '../../../model/reservation_model.dart';
 
 Widget UpcomingMoviesCarousel(BuildContext context, List<UpcomingMoviesModel> upcomingMovies){
   return CarouselSlider(
@@ -15,6 +16,7 @@ Widget UpcomingMoviesCarousel(BuildContext context, List<UpcomingMoviesModel> up
         builder: (context){
           return InkResponse(
             onTap: (){
+              ReservationModel.movie_name = index.name;
               Navigator.push(context, MaterialPageRoute(builder: (context) => MovieDetails(index)));
             },
             child: Container(

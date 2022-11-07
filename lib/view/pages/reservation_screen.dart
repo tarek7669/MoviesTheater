@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movies_theater/constants/color_consts.dart';
+import 'package:movies_theater/model/reservation_model.dart';
 
 import '../../view_model/Bloc/movie_reservation/reservation_cubit.dart';
 import 'checkout_screen.dart';
@@ -19,7 +20,13 @@ class ReservationScreen extends StatelessWidget {
       backgroundColor: backColor,
       bottomNavigationBar: InkResponse(
         onTap: (){
-          Navigator.push(context, MaterialPageRoute(builder: (context) => CheckoutScreen()));
+          if(ReservationModel.num_of_selected_seats <= 0){
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: Text("You Must Select At Least 1 Seat"),
+            ));
+          }else{
+            Navigator.push(context, MaterialPageRoute(builder: (context) => CheckoutScreen()));
+          }
         },
         child: Container(
           height: 75,
@@ -50,7 +57,7 @@ class ReservationScreen extends StatelessWidget {
           ),
 
           BlocProvider(
-            create: (context) => ReservationCubit(),
+            create: (context) => ReservationCubit()..init(),
             child: Center(
               child: Container(
                 padding: EdgeInsets.fromLTRB(31.5, 24, 31.5, 0),
@@ -72,6 +79,7 @@ class ReservationScreen extends StatelessWidget {
                           child: Swiper(
                             layout: SwiperLayout.CUSTOM,
                             onIndexChanged: (index){
+                              ReservationModel.time = reserve_cubit.screen_time[index];
                               reserve_cubit.TimeSelected(index);
                             },
                             customLayoutOption: CustomLayoutOption(
@@ -89,7 +97,7 @@ class ReservationScreen extends StatelessWidget {
                               Offset(100.0, 10.0)
                             ]),
                             itemWidth: 70.0,
-                            itemHeight: 50.0,
+                            itemHeight: 30.0,
                             fade: 0.5,
                             loop: true,
                             // pagination: SwiperPagination(),
@@ -101,7 +109,7 @@ class ReservationScreen extends StatelessWidget {
                                     Text(reserve_cubit.screen_time[index],
                                       style: GoogleFonts.getFont('Roboto', color: Colors.white, fontWeight: FontWeight.w300, fontSize: 16),
                                     ),
-                                    // if(reserve_cubit.getTimeSelected() == index)
+                                    // if(index == 2)
                                     //   SvgPicture.asset("assets/images/dot.svg")
                                   ],
                                 ),
@@ -112,6 +120,8 @@ class ReservationScreen extends StatelessWidget {
                         );
                       },
                     ),
+                    SvgPicture.asset("assets/images/dot.svg"),
+                    SizedBox(height: 13),
 
                     SvgPicture.asset("assets/images/reservationScreen.svg"),
 
@@ -163,10 +173,10 @@ class ReservationScreen extends StatelessWidget {
                                         scrollDirection: Axis.horizontal,
                                         shrinkWrap: true,
                                         itemBuilder: (BuildContext context,int j) {
+
                                           return reserve.SelectSeat(i, size, j,
-                                            reserve.seats.contains(reserve.selected) ?
-                                                "assets/images/selected_seat.svg"
-                                                : "assets/images/avalaible_seat.svg"
+                                              reserve.seats_test[i][j] ? "assets/images/avalaible_seat.svg"
+                                              : "assets/images/reserved_seat.svg"
                                           );
                                         }),
                                   ],
@@ -215,30 +225,38 @@ class ReservationScreen extends StatelessWidget {
 
                     SizedBox(height: 60,),
 
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
+                    BlocConsumer<ReservationCubit, ReservationState>(
+                      listener: (context, state) {
+                        // TODO: implement listener
+                      },
+                      builder: (context, state) {
+                        ReservationCubit reserve = ReservationCubit.get(context);
+                        return Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            SvgPicture.asset("assets/images/money.svg", width: 26, height: 22,),
-                            SizedBox(width: 6,),
-                            Text("150 EGP",
-                              style: GoogleFonts.getFont('Roboto', color: Colors.white, fontWeight: FontWeight.w700, fontSize: 18),
-                            )
+                            Row(
+                              children: [
+                                SvgPicture.asset("assets/images/money.svg", width: 26, height: 22,),
+                                SizedBox(width: 6,),
+                                Text(ReservationModel.pay_sum.toString(),
+                                  style: GoogleFonts.getFont('Roboto', color: Colors.white, fontWeight: FontWeight.w700, fontSize: 18),
+                                )
+                              ],
+                            ),
+
+                            SvgPicture.asset("assets/images/dot.svg", width: 6, height: 6, color: Colors.white,),
+
+                            Row(
+                              children: [
+                                Text("${ReservationModel.num_of_selected_seats} seats selected",
+                                  style: GoogleFonts.getFont('Roboto', color: Colors.white, fontWeight: FontWeight.w700, fontSize: 18),
+                                )
+                              ],
+                            ),
+
                           ],
-                        ),
-
-                        SvgPicture.asset("assets/images/dot.svg", width: 6, height: 6, color: Colors.white,),
-
-                        Row(
-                          children: [
-                            Text("4 seats selected",
-                              style: GoogleFonts.getFont('Roboto', color: Colors.white, fontWeight: FontWeight.w700, fontSize: 18),
-                            )
-                          ],
-                        ),
-
-                      ],
+                        );
+                      },
                     ),
                   ],
                 ),
